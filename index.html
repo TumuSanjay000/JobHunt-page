@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>JobHunt</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+            font-family: 'Lato', sans-serif;
+        }
+
+        body {
+            background-color: #e7e8ff;
+        }
+
+        .header-nav {
+            background-color: #333;
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-logo {
+            color: #fff;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .header-items {
+            display: flex;
+        }
+
+        .header-items a {
+            color: #fff;
+            text-decoration: none;
+            padding: 15px;
+        }
+
+        .header-items a:hover {
+            background-color: #555;
+        }
+
+        .profile-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            margin-right: 20px;
+            cursor: pointer;
+        }
+
+        .profile-btn:hover {
+            background-color: #45a049;
+        }
+
+        .main-content {
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .main-header {
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-container {
+            width: 70%;
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .search-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+        }
+
+        .filter-wrapper {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 30px;
+        }
+
+        .filter {
+            display: inline-block;
+        }
+
+        .filter-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .sort-section {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+            padding-top: 10px;
+            margin-right: 20%;
+        }
+
+        .sort-section p {
+            font-size: 14px;
+            padding: 7px;
+        }
+
+        .sort-select select {
+            height: 1.5rem;
+            background-color: #45a049;
+            color: #fff;
+            border-radius: 20px;
+            margin-top: 0 0.5rem;
+            border: none;
+        }
+
+        .sort-select select:hover {
+            background-color: #333;
+            cursor: pointer;
+        }
+
+        .cards-wrapper {
+            width: 75%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 0;
+            gap: 1rem;
+            overflow-y: auto;
+        }
+
+        .card {
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: flex-start;
+            padding: 3%;
+            margin: 0 1% 1% 1%;
+            background-color: #fff;
+            line-height: 1.5;
+            gap: 1.5rem;
+            box-shadow: rgba(0, 0, 0, 0.16);
+            border: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            box-shadow: rgba(0, 0, 0, 0.24);
+        }
+
+        .logo-card {
+            width: 10%;
+            min-width: 50px;
+            display: flex;
+            justify-content: center;
+            border: 20%;
+            border-radius: 20%;
+        }
+
+        .logo-card img {
+            width: 100%;
+            height: auto;
+            min-height: 60px;
+            padding: 1rem;
+        }
+
+        .card-center {
+            width: 50%;
+            font-size: 18px;
+        }
+
+        .card-location,
+        .card-subtitle {
+            font-size: 15px;
+            color: var(--dgray);
+        }
+
+        :root {
+            --primaryColor: black;
+            --secondaryColor: #ffce00;
+            --fontcolor: #1e1e1e;
+            --greyc: #e7e7e7;
+            --dgray: #5f5f5f;
+            --spurple: #e7e8ff;
+            --sblue: #c3e1ff;
+            --sy: #fff5cc;
+            --sr: #ffcbc8;
+        }
+
+        .card-subtitle {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .card-subtitle p {
+            display: flex;
+            padding: 0 0.5rem 0 0;
+            align-items: center;
+        }
+
+        .role-card {
+            font-size: 18px;
+        }
+
+        .tag a {
+            color: var(--fontcolor);
+            font-size: 15px;
+        }
+
+        .salary {
+            padding: 0.5rem 0;
+            color: var(--primaryColor);
+            font-size: 18px;
+        }
+
+        .salary span {
+            color: var(--fontcolor);
+            font-size: 15px;
+        }
+
+        .blue-bg {
+            background-color: var(--sblue);
+        }
+
+        .yellow-bg {
+            background-color: var(--sy);
+        }
+
+        .red-bg {
+            background-color: var(--sr);
+        }
+        
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 25px;
+            font-size: 20px;
+        }
+    </style>
+    <script src='main.js'></script>
+</head>
+
+<body>
+    <div class="header-nav">
+        <h1 class="header-logo">JobHunt</h1>
+        <div class="header-items">
+            <a href="#"><i class="fa-solid fa-house"></i>Home</a>
+            <a href="#"><i class="fa-regular fa-newspaper"></i>Find Jobs</a>
+            <a href="#"><i class="fa-solid fa-chart-simple"></i>Performance</a>
+            <a href="#"><i class="fa-regular fa-bookmark"></i>Saved Profiles</a>
+            <a href="#"><i class="fa-regular fa-message"></i>Chats</a>
+            <a href="#"><i class="fa-solid fa-bars"></i>Settings</a>
+        </div>
+        <div class="profile">
+            <button class="profile-btn"> <i class="fa-regular fa-user"></i> Login</button>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="main-header">
+            <div class="search-container">
+                <input type="text" placeholder="Search your best jobs">
+                <button class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+        <div class="filter-wrapper" id="recommendations">
+            <p>AI Generated</p>
+            <div class="filter">
+                <button class="filter-btn">Designing</button>
+                <button class="filter-btn">Web Developer</button>
+                <button class="filter-btn">Data Science</button>
+                <button class="filter-btn">Cyber Security</button>
+                <button class="filter-btn">Data Engineer</button>
+            </div>
+        </div>
+        <div class="sort-section">
+            <p>Filter</p>
+            <div class="sort-select">
+                <select>
+                    <option value="0">All</option>
+                    <option value="0">New Post</option>
+                    <option value="0">Old Post</option>
+                    <option value="0">Most Popular</option>
+                    <option value="0">Highest Paid</option>
+                </select>
+            </div>
+        </div>
+        <div class="cards-wrapper">
+            <div class="card">
+                <div class="logo-card blue-bg">
+                    <img src="https://cdn.freebiesupply.com/images/large/2x/apple-logo-transparent.png" alt="applelogo">
+                </div>
+                <div class="card-center">
+                    <h3>Apple</h3>
+                    <p class="card-details">Data Science, Data Engineer</p>
+                    <p class="card-location"><i class="fa-solid fa-location-dot"></i> California</p>
+                    <div class="card-subtitle">
+                        <p><i class="fa-regular fa-clock"></i> 1 mins ago</p>
+                        <p><i class="fa-regular fa-calendar"></i> Full-time</p>
+                        <p><i class="fa-brands fa-apple"></i> 100 Applications</p>
+                    </div>
+                </div>
+                <div class="role-card">
+                    <div class="tag">
+                        <h5>Division</h5>
+                        <a href="#">Data Engineer</a>
+                    </div>
+                    <div class="salary">
+                        <p><b>$350k</b><span>/year</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="logo-card yellow-bg">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Salesforce.com_logo.svg/1200px-Salesforce.com_logo.svg.png"
+                        alt="salesforce">
+                </div>
+                <div class="card-center">
+                    <h3>Salesforce</h3>
+                    <p class="card-details">Data Science</p>
+                    <p class="card-location"><i class="fa-solid fa-location-dot"></i>India</p>
+                    <div class="card-subtitle">
+                        <p><i class="fa-regular fa-clock"></i> 5 mins ago</p>
+                        <p><i class="fa-regular fa-calendar"></i> Full-time</p>
+                        <p><i class="fa-brands fa-salesforce"></i> 120 Applications</p>
+                    </div>
+                </div>
+                <div class="role-card">
+                    <div class="tag">
+                        <h5>Division</h5>
+                        <a href="#">Data Science</a>
+                    </div>
+                    <div class="salary">
+                        <p><b>$200k</b><span>/year</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="logo-card red-bg">
+                    <img src="https://brandongaille.com/wp-content/uploads/2013/07/nVidia-Company-Logo.jpg"
+                        alt="nvidia">
+                </div>
+                <div class="card-center">
+                    <h3>Nvidia</h3>
+                    <p class="card-details">Designing</p>
+                    <p class="card-location"><i class="fa-solid fa-location-dot"></i>UK</p>
+                    <div class="card-subtitle">
+                        <p><i class="fa-regular fa-clock"></i> 15 mins ago</p>
+                        <p><i class="fa-regular fa-calendar"></i> Full-time</p>
+                        <p> 80 Applications</p>
+                    </div>
+                </div>
+                <div class="role-card">
+                    <div class="tag">
+                        <h5>Division</h5>
+                        <a href="#">Designing</a>
+                    </div>
+                    <div class="salary">
+                        <p><b>$350k</b><span>/year</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="logo-card blue-bg">
+                    <img src="https://www.shutterstock.com/image-vector/amazon-initial-logo-isolated-white-600nw-2272856739.jpg"
+                        alt="amazon">
+                </div>
+                <div class="card-center">
+                    <h3>Amazon</h3>
+                    <p class="card-details">Cyber Security</p>
+                    <p class="card-location"><i class="fa-solid fa-location-dot"></i>Hyderabad, India</p>
+                    <div class="card-subtitle">
+                        <p><i class="fa-regular fa-clock"></i> 20 mins ago</p>
+                        <p><i class="fa-regular fa-calendar"></i> Full-time</p>
+                        <p><i class="fa-brands fa-amazon"></i> 50 Applications</p>
+                    </div>
+                </div>
+                <div class="role-card">
+                    <div class="tag">
+                        <h5>Division</h5>
+                        <a href="#">Cyber Security</a>
+                    </div>
+                    <div class="salary">
+                        <p><b>$150k</b><span>/year</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="logo-card red-bg">
+                    <img src="https://e7.pngegg.com/pngimages/946/191/png-clipart-flipkart-e-commerce-logo-bangalore-chief-executive-others-miscellaneous-blue-thumbnail.png"
+                        alt="flipkart">
+                </div>
+                <div class="card-center">
+                    <h3>Flipkart</h3>
+                    <p class="card-details">Data Science, Web Developer</p>
+                    <p class="card-location"><i class="fa-solid fa-location-dot"></i>Hyderabad, India</p>
+                    <div class="card-subtitle">
+                        <p><i class="fa-regular fa-clock"></i> 40 mins ago</p>
+                        <p><i class="fa-regular fa-calendar"></i> Full-time</p>
+                        <p>350 Applications</p>
+                    </div>
+                </div>
+                <div class="role-card">
+                    <div class="tag">
+                        <h5>Division</h5>
+                        <a href="#">Web Developer</a>
+                    </div>
+                    <div class="salary">
+                        <p><b>$250k</b><span>/year</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 JobHunt. All rights reserved.</p>
+    </footer>
+
+</body>
+<script src="https://kit.fontawesome.com/47f634f91c.js" crossorigin="anonymous"></script>
+</html>
